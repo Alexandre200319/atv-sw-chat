@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      margin: 0;
+    }
+
+    .teladochat {
+      border-radius: 8px;
+      padding: 10px;
+      margin: 50px auto;
+      max-width: 50%;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      overflow: hidden;
+    }
+
+    .cabeçalho {
+      border-radius: 8px;
+      background-color: green;
+      color: white;
+      text-align: center;
+      padding: 10px;
+    }
+
+    .mensagens {
+      padding: 0px;
+      height: 600px;
+      padding-top: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 5px;
+      overflow-y: auto;
+    }
+
+    .message-container {
+      border-radius: 8px;
+      width: 100%;
+      background-color: gainsboro;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background-color: transparent;
+    }
+
+    .atendente,
+    .cliente {
+      max-width: 70%;
+      padding: 10px;
+      border-radius: 5px;
+      margin-bottom: 10px;
+
+    }
+
+    .atendente {
+      background-color: burlywood;
+      margin-left: auto;
+    }
+
+    .cliente {
+      background-color: salmon;
+      margin-right: auto;
+    }
+
+    .input-container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px;
+      background-color: white;
+    }
+
+    .input {
+      flex: 1;
+      padding: 8px 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+
+    .button {
+      background-color: white;
+      border-radius: 3px;
+      padding: 8px 10px;
+      cursor: pointer;
+      display: flex;
+      border-width: 1px;
+      border: solid black;
+    }
+  </style>
+  <title>Chat de Atendimento</title>
+</head>
+
+<body>
+  <div class="teladochat">
+    <div class="cabeçalho">
+      Atendimento Online
+    </div>
+    <div class="mensagens" id="contentBox">
+      <div class="message-container">
+        <p class="atendente">
+          Atendente:<br>
+          Oi! Como posso ajudar você?
+        </p>
+        <p class="cliente">Cliente:<br>
+          Olá! Gostaria de agendar uma consulta.
+        </p>
+        <p class="atendente">Atendente:<br>
+          Claro, consegue me passar a data e horário desejado.
+        </p>
+        <p class="cliente">Cliente:<br>
+          Pode ser sexta pela manhã?
+        </p>
+        <p class="atendente">Atendente:<br>
+          Ok, sua consulta ficou agendada para as 10h da manhã de sexta-feira.
+        </p>
+      </div>
+    </div>
+    <div class="input-container">
+      <input type="text" class="input" placeholder="Digite sua mensagem..." id="mensagem">
+      <div>
+        <button class="button" type="button" id="enviar">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("mensagem");
+    const botao = document.getElementById("enviar");
+    const mensagens = document.querySelector(".mensagens");
+
+    botao.addEventListener("click", function () {
+      const mensagem = input.value.trim();
+      if (mensagem) {
+        const divMensagem = document.createElement("div");
+        divMensagem.classList.add("cliente");
+        const p = document.createElement("p");
+        p.textContent = "Cliente: " + mensagem;
+        divMensagem.appendChild(p);
+        mensagens.appendChild(divMensagem);
+        input.value = "";
+      }
+    });
+
+    input.addEventListener("keypress", function (e) {
+      if (e.key === "Enter") {
+        botao.click();
+      }
+    });
+
+  </script>
+</body>
+
+</html>
